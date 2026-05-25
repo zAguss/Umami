@@ -7,14 +7,29 @@ import {
   Heading,
   Icon,
   PasswordField,
+  Row,
+  Text,
   TextField,
 } from '@umami/react-zen';
 import { useRouter } from 'next/navigation';
+import type { CSSProperties } from 'react';
 import { useMessages, useUpdateQuery } from '@/components/hooks';
+import { ExternalLink, Globe, Mail } from '@/components/icons';
 import { Logo } from '@/components/svg';
 import { setClientAuthToken } from '@/lib/client';
 import { consumeReturnUrl } from '@/lib/return-url';
 import { setUser } from '@/store/app';
+
+const linkCardStyle: CSSProperties = {
+  textDecoration: 'none',
+  color: 'inherit',
+  display: 'block',
+};
+
+const hoverableStyle: CSSProperties = {
+  transition: 'background 0.15s, border-color 0.15s',
+  cursor: 'pointer',
+};
 
 export function LoginForm() {
   const { t, labels, getErrorMessage } = useMessages();
@@ -76,33 +91,69 @@ export function LoginForm() {
           </FormSubmitButton>
         </FormButtons>
       </Form>
-      <div
-        style={{
-          minWidth: 300,
-          textAlign: 'center',
-          fontSize: '0.8rem',
-          opacity: 0.6,
-          lineHeight: 1.6,
-        }}
-      >
-        <p style={{ margin: '0 0 4px' }}>
-          Acceso privado para clientes de{' '}
-          <a
-            href="https://zagus.me"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: 'inherit', textDecoration: 'underline' }}
+
+      <Column gap="3" style={{ minWidth: 300 }}>
+        <Row alignItems="center" gap="3">
+          <div style={{ flex: 1, height: 1, background: 'var(--border-default)' }} />
+          <Text size="xs" style={{ color: 'var(--text-disabled)', whiteSpace: 'nowrap' }}>
+            Acceso privado
+          </Text>
+          <div style={{ flex: 1, height: 1, background: 'var(--border-default)' }} />
+        </Row>
+
+        <a href="https://zagus.me" target="_blank" rel="noopener noreferrer" style={linkCardStyle}>
+          <Row
+            alignItems="center"
+            gap="3"
+            paddingX="3"
+            paddingY="2"
+            borderRadius
+            border
+            backgroundColor="surface-base"
+            style={hoverableStyle}
           >
-            zagus.me
-          </a>
-        </p>
-        <p style={{ margin: 0 }}>
-          ¿Olvidaste tu contraseña?{' '}
-          <a href="mailto:legal@zagus.me" style={{ color: 'inherit', textDecoration: 'underline' }}>
-            legal@zagus.me
-          </a>
-        </p>
-      </div>
+            <Icon size="sm">
+              <Globe />
+            </Icon>
+            <Column gap="0" style={{ flex: 1 }}>
+              <Text size="xs" style={{ color: 'var(--text-disabled)' }}>
+                Propietario
+              </Text>
+              <Text size="sm" weight="bold">
+                zagus.me
+              </Text>
+            </Column>
+            <Icon size="xs" style={{ opacity: 0.35 }}>
+              <ExternalLink />
+            </Icon>
+          </Row>
+        </a>
+
+        <a href="mailto:legal@zagus.me" style={linkCardStyle}>
+          <Row
+            alignItems="center"
+            gap="3"
+            paddingX="3"
+            paddingY="2"
+            borderRadius
+            border
+            backgroundColor="surface-base"
+            style={hoverableStyle}
+          >
+            <Icon size="sm">
+              <Mail />
+            </Icon>
+            <Column gap="0">
+              <Text size="xs" style={{ color: 'var(--text-disabled)' }}>
+                ¿Olvidaste tu contraseña?
+              </Text>
+              <Text size="sm" weight="bold">
+                legal@zagus.me
+              </Text>
+            </Column>
+          </Row>
+        </a>
+      </Column>
     </Column>
   );
 }
