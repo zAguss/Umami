@@ -76,6 +76,33 @@ export function LoginForm() {
           </FormSubmitButton>
         </FormButtons>
       </Form>
+      <div
+        style={{
+          minWidth: 300,
+          textAlign: 'center',
+          fontSize: '0.8rem',
+          opacity: 0.6,
+          lineHeight: 1.6,
+        }}
+      >
+        <p style={{ margin: '0 0 4px' }}>
+          Acceso privado para clientes de{' '}
+          <a
+            href="https://zagus.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'inherit', textDecoration: 'underline' }}
+          >
+            zagus.me
+          </a>
+        </p>
+        <p style={{ margin: 0 }}>
+          ¿Olvidaste tu contraseña?{' '}
+          <a href="mailto:legal@zagus.me" style={{ color: 'inherit', textDecoration: 'underline' }}>
+            legal@zagus.me
+          </a>
+        </p>
+      </div>
     </Column>
   );
 }
